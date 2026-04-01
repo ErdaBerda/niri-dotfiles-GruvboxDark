@@ -29,3 +29,5 @@ Applications and whatnots:
 if you dont see anything in the files, well wait until i make a release lol its not gonna be instant, but for the moment here are some screenshots of the approximate result
 
 [screenshots here]
+
+if you want to add theming for other apps / thingamabobs i'd be more than happy to invite you to make a PR, add whatever theming you want, modify the install script and do your thing, *remember that the purpose is to make this as simple as possible, and let whoever wants to use these to choose what they want to install or not*
