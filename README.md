@@ -1,7 +1,7 @@
 # niri-dotfiles-GruvboxDark
 my niri dotfiles setup
 
-my niri dotfiles based on gruvbox dark theme, they are based on XXXXXX's dotfiles and are modified to march my daily workflow
+my niri dotfiles based on gruvbox dark theme, they are based on seven's dotfiles and are modified to march my daily workflow
 
 as opposed to regular dotfiles i guess, they are very simplified and dont include any overcomplicated or advanced stuff, theres no 54327890 different keybinds or 629873449 different gui stuff running in the background
 
@@ -9,7 +9,7 @@ Graphical elements:
   rofi launcher
   waybar
   niri
-  awww with a wallpaper script (credit goes to XXXXX)
+  swaybg with a wallpaper script (proudly works)
 
 Background elements:
   mako
@@ -30,6 +30,7 @@ rofi is kinda the swiss knife here, used in these ways:
 - dmenu
 - power menu (credits to https://github.com/jluttine/rofi-power-menu)
 - window switcher
+- wallpaper switcher
   
 
 if you dont see anything in the files, well wait until i make a release lol its not gonna be instant, but for the moment here are some screenshots of the approximate result
@@ -39,3 +40,4 @@ if you dont see anything in the files, well wait until i make a release lol its 
 if you want to add theming for other apps / thingamabobs i'd be more than happy to invite you to make a PR, add whatever theming you want, modify the install script and do your thing, *remember that the purpose is to make this as simple as possible, and let whoever wants to use these to choose what they want to install or not*
 
 the script install.sh is VERY experimental AND NOT YET WORKING; FOR NOW INSTALL THEM MANUALLY
+this is very alpha, dont flame me if its unfinished
