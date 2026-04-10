@@ -1,0 +1,16 @@
+#!/usr/bin/env bash
+
+STASH="$HOME/Pictures/wallpapers/wallpaper-stash"
+CURRENT="$HOME/Pictures/wallpapers/current-wallpaper.png"
+
+# If no argument is passed, list the wallpapers
+if [ -z "$1" ]; then
+    ls "$STASH"
+else
+    # If an argument is passed, that's the selection
+    cp "$STASH/$1" "$CURRENT"
+    pkill swaybg
+    swaybg -i "$CURRENT" -m fill > /dev/null 2>&1 &
+    disown
+    exit 0
+fi

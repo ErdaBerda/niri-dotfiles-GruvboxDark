@@ -1,0 +1,294 @@
+// Startup Applications
+spawn-sh-at-startup "/usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1 &"
+spawn-sh-at-startup "swaybg -i $HOME/Pictures/wallpapers/current-wallpaper.png -m fill"
+spawn-at-startup "waybar"
+spawn-at-startup "xwayland-satellite"
+spawn-at-startup "otd-daemon"
+spawn-sh-at-startup "/usr/lib/polkit-gnome &"
+prefer-no-csd
+screenshot-path "~/Pictures/Screenshots/%Y-%m-%d %H-%M-%S.png"
+
+output "eDP-1" {
+    mode "2880x1800@120"
+    scale 1.5
+    hot-corners { 
+	off 
+	}	
+}
+
+output "DP-1" {
+    hot-corners {
+	off
+	}
+}
+
+
+input {
+    keyboard {
+        xkb {
+            layout "ch"
+        }
+    }
+
+    touchpad {
+        tap
+        natural-scroll
+	accel-speed 0
+	accel-profile "flat"
+    }
+    tablet {
+        map-to-output "eDP-1"
+    }
+    focus-follows-mouse
+    workspace-auto-back-and-forth
+}
+
+hotkey-overlay {
+    skip-at-startup
+}
+
+overview {
+    workspace-shadow {
+        on
+    }
+}
+
+layer-rule {
+    match namespace="^swaybg$"
+    place-within-backdrop true
+}
+
+animations {  
+    slowdown 2
+}
+
+
+binds {
+    MOD+SHIFT+ESCAPE                    { show-hotkey-overlay; }
+
+    MOD+RETURN                          hotkey-overlay-title="Open Terminal: alacritty" { spawn-sh "alacritty"; }
+    MOD+SHIFT+Q                         hotkey-overlay-title="Lock Screen: swaylock" { spawn-sh "swaylock"; }
+    MOD+D                               hotkey-overlay-title="Open App Launcher: rofi" { spawn-sh "rofi -show drun"; }
+    MOD+E                               hotkey-overlay-title="File Manager: Nautilus" { spawn-sh "nautilus -w"; }
+    MOD+W                               hotkey-overlay-title="Open Wallpaper Selector" { spawn-sh "rofi -show wallpapers -modi wallpapers:.config/rofi/rofi-wallpaper-selector"; }
+
+    XF86MonBrightnessUp                 allow-when-locked=true { spawn-sh "brightnessctl set +5%"; }
+    XF86MonBrightnessDown               allow-when-locked=true { spawn-sh "brightnessctl set 5%-"; }
+    XF86AudioRaiseVolume allow-when-locked=true { spawn-sh "wpctl set-volume @DEFAULT_AUDIO_SINK@ 0.05+ -l 1.0"; }
+    XF86AudioLowerVolume allow-when-locked=true { spawn-sh "wpctl set-volume @DEFAULT_AUDIO_SINK@ 0.05-"; }
+    XF86AudioMute        allow-when-locked=true { spawn-sh "wpctl set-mute @DEFAULT_AUDIO_SINK@ toggle"; }
+    XF86AudioMicMute     allow-when-locked=true { spawn-sh "wpctl set-mute @DEFAULT_AUDIO_SOURCE@ toggle"; }
+
+    XF86AudioPlay        allow-when-locked=true { spawn-sh "playerctl play-pause"; }
+    XF86AudioStop        allow-when-locked=true { spawn-sh "playerctl stop"; }
+    XF86AudioPrev        allow-when-locked=true { spawn-sh "playerctl previous"; }
+    XF86AudioNext        allow-when-locked=true { spawn-sh "playerctl next"; }
+
+    MOD+Q                               { close-window; }
+    MOD+LEFT                            { focus-column-left; }
+    MOD+DOWN                            { focus-window-down; }
+    MOD+UP                              { focus-window-up; }
+    MOD+RIGHT                           { focus-column-right; }
+
+    MOD+SHIFT+LEFT                      { move-column-left; }
+    MOD+SHIFT+DOWN                      { move-window-down; }
+    MOD+SHIFT+UP                        { move-window-up; }
+    MOD+SHIFT+RIGHT                     { move-column-right; }
+
+    MOD+CTRL+LEFT                       { focus-monitor-left; }
+    MOD+CTRL+RIGHT                      { focus-monitor-right; }
+    MOD+CTRL+UP                         { focus-monitor-up; }
+    MOD+CTRL+DOWN                       { focus-monitor-down; }
+
+    MOD+SHIFT+CTRL+LEFT                 { move-column-to-monitor-left; }
+    MOD+SHIFT+CTRL+RIGHT                { move-column-to-monitor-right; }
+    MOD+SHIFT+CTRL+UP                   { move-column-to-monitor-up; }
+    MOD+SHIFT+CTRL+DOWN                 { move-column-to-monitor-down; }
+
+    MOD+section                         hotkey-overlay-title="Open Overview" repeat=false { toggle-overview; }
+    MOD+WHEELSCROLLDOWN                 cooldown-ms=100 { focus-workspace-down; }
+    MOD+WHEELSCROLLUP                   cooldown-ms=100 { focus-workspace-up; }
+
+    MOD+SHIFT+WHEELSCROLLDOWN           cooldown-ms=100 { move-column-to-workspace-down; }
+    MOD+SHIFT+WHEELSCROLLUP             cooldown-ms=100 { move-column-to-workspace-up; }
+
+    MOD+1                               { focus-workspace 1; }
+    MOD+2                               { focus-workspace 2; }
+    MOD+3                               { focus-workspace 3; }
+    MOD+4                               { focus-workspace 4; }
+    MOD+5                               { focus-workspace 5; }
+    MOD+6                               { focus-workspace 6; }
+    MOD+7                               { focus-workspace 7; }
+    MOD+8                               { focus-workspace 8; }
+    MOD+9                               { focus-workspace 9; }
+    MOD+SHIFT+1                         { move-column-to-workspace 1; }
+    MOD+SHIFT+2                         { move-column-to-workspace 2; }
+    MOD+SHIFT+3                         { move-column-to-workspace 3; }
+    MOD+SHIFT+4                         { move-column-to-workspace 4; }
+    MOD+SHIFT+5                         { move-column-to-workspace 5; }
+    MOD+SHIFT+6                         { move-column-to-workspace 6; }
+    MOD+SHIFT+7                         { move-column-to-workspace 7; }
+    MOD+SHIFT+8                         { move-column-to-workspace 8; }
+    MOD+SHIFT+9                         { move-column-to-workspace 9; }
+
+    MOD+TAB                             { spawn-sh "rofi -show window"; }
+    MOD+ESCAPE 				{ spawn-sh "rofi -show power-menu -modi power-menu:./.config/rofi/rofi-power-menu"; }
+    MOD+C                               { center-column; }
+
+    MOD+T                               { toggle-window-floating; }
+    MOD+F                               { fullscreen-window; }
+    MOD+M                               { maximize-column; }
+
+    MOD+S                               { screenshot; }
+    MOD+ALT+W                           { spawn "sh" "-c" "pgrep -x waybar >/dev/null && killall waybar || waybar &"; }
+}
+
+// Layout Settings
+layout {
+    gaps 5
+    background-color "transparent"
+    preset-column-widths {
+        proportion 0.33333
+        proportion 0.5
+        proportion 0.66667
+    }
+
+    focus-ring {
+        off
+    }
+
+    border {
+        width 2
+        active-color "#fabd2f"
+        inactive-color "#505050"
+        urgent-color "#9b0000"
+    }
+
+    insert-hint {
+        off
+    }
+
+    struts {
+        left 5
+        right 5
+        top 5
+        bottom 5
+}
+
+}
+
+
+// Window
+
+window-rule {
+    match app-id=r#"brave"#
+    match app-id=r#"zed"#
+    match app-id=r#"rnote$"#
+    open-maximized true
+}
+
+// File dialogs - Open/Save/Select
+window-rule {
+    match title=r#".*(Open|Save|Select).*"#
+    open-floating true
+    default-column-width { proportion 0.0; }
+    max-width 800
+    max-height 1000
+}
+
+window-rule {
+    match title=r#".*File.*"#
+    open-floating true
+    default-column-width { proportion 0.0; }
+    max-width 800
+    max-height 1000
+}
+
+window-rule {
+    match app-id=r#"org\.gtk\.FileChooserDialog"#
+    open-floating true
+    default-column-width { proportion 0.0; }
+    max-width 800
+    max-height 1000
+}
+
+window-rule {
+    match title=r#".*Sign in - Google Accounts — Mozilla Firefox"#
+    open-floating true
+}
+
+// System dialogs
+window-rule {
+    match title=r#".*(Dialog|Properties|Preferences|Settings|Rename).*"#
+    open-floating true
+}
+
+// Authentication dialogs
+window-rule {
+    match app-id=r#"org\.kde\.polkit-kde-authentication-agent-1"#
+    open-floating true
+}
+
+window-rule {
+    match title=r#".*Authentication.*"#
+    open-floating true
+}
+
+// Notification and system utilities
+window-rule {
+    match app-id=r#"nm-connection-editor"#
+    open-floating true
+}
+
+window-rule {
+    match app-id=r#"blueman-manager"#
+    open-floating true
+}
+
+window-rule {
+    match app-id=r#"pavucontrol"#
+    open-floating true
+}
+
+// Steam dialogs
+window-rule {
+    match app-id=r#"steam"# title=r#".*(Friends|Settings|Properties).*"#
+    open-floating true
+}
+
+// Global window appearance
+window-rule {
+    geometry-corner-radius 5
+    clip-to-geometry true
+}
+
+// Environment Variables
+environment {
+    ELECTRON_OZONE_PLATFORM_HINT "auto"
+    XDG_SESSION_TYPE "wayland"
+    XDG_CURRENT_DESKTOP "GNOME"
+
+    // Wayland Platform Settings
+    QT_QPA_PLATFORM "wayland"
+    QT_QPA_PLATFORMTHEME "gtk3"
+    QT_QPA_PLATFORMTHEME_QT6 "gtk3"
+    QT_WAYLAND_DISABLE_WINDOWDECORATION "1"
+    QT_AUTO_SCREEN_SCALE_FACTOR "1"
+
+    // GTK Settings
+    GDK_BACKEND "wayland,x11"
+
+    // Java Applications
+    _JAVA_AWT_WM_NONREPARENTING "1"
+
+    // SDL Applications
+    SDL_VIDEODRIVER "wayland"
+
+    // CLUTTER Applications
+    CLUTTER_BACKEND "wayland"
+
+    // Performance
+    VDPAU_DRIVER "va_gl"
+    LIBVA_DRIVER_NAME "iHD"
+    DISPLAY ":0"
+}
